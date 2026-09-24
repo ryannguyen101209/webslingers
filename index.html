@@ -1,30 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Webslingers.inc — From idea to live in record time</title>
-<meta name="description" content="Webslingers builds professional-looking websites for small businesses in Vietnam. Live in 7–14 days, from 200,000 ₫.">
+<title data-i18n="meta.title">Webslingers.inc — Từ ý tưởng đến lên sóng trong thời gian kỷ lục</title>
+<meta name="description" data-i18n-content="meta.desc" content="Webslingers làm website chuyên nghiệp cho doanh nghiệp nhỏ tại Việt Nam. Lên sóng trong 7–14 ngày, chỉ từ 200.000 ₫.">
 <meta name="theme-color" content="#fff3d1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script src="i18n.js" defer></script>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main" data-i18n="skip">Bỏ qua đến nội dung</a>
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a href="#top" class="logo" aria-label="Webslingers.inc home">WEBSLINGERS<span>.INC</span></a>
-    <nav aria-label="Main">
+    <a href="#top" class="logo" data-i18n-aria-label="nav.home" aria-label="Trang chủ Webslingers.inc">WEBSLINGERS<span>.INC</span></a>
+    <nav data-i18n-aria-label="nav.label" aria-label="Điều hướng chính">
       <ul class="nav-links">
-        <li><a href="#how">How it works</a></li>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#how" data-i18n="nav.how">Cách làm</a></li>
+        <li><a href="#work" data-i18n="nav.work">Dự án</a></li>
+        <li><a href="#pricing" data-i18n="nav.pricing">Bảng giá</a></li>
       </ul>
+      <button type="button" class="lang-toggle" id="langToggle" lang="en" hidden
+              data-i18n-aria-label="lang.label" aria-label="Switch to English">
+        <span data-i18n="lang.other" lang="en">EN</span>
+      </button>
     </nav>
-    <a href="#contact" class="btn btn-dark btn-sm">Get a quote</a>
+    <a href="#contact" class="btn btn-dark btn-sm" data-i18n="nav.quote">Báo giá</a>
   </div>
 </header>
 
@@ -43,17 +48,17 @@
       </g>
     </svg>
     <div class="wrap hero-inner">
-      <p class="eyebrow">Websites for small businesses in Vietnam</p>
-      <h1>From idea to <mark>live</mark> in record time.</h1>
-      <p class="lede">A professional website for your shop, café or studio — built in 7–14 days, from 200,000&nbsp;₫.</p>
+      <p class="eyebrow" data-i18n="hero.eyebrow">Website cho doanh nghiệp nhỏ tại Việt Nam</p>
+      <h1 data-i18n="hero.title">Từ ý tưởng đến <mark>lên sóng</mark> trong thời gian kỷ lục.</h1>
+      <p class="lede" data-i18n="hero.lede">Website chuyên nghiệp cho cửa hàng, quán cà phê hay studio của bạn — hoàn thành trong 7–14 ngày, chỉ từ 200.000&nbsp;₫.</p>
       <div class="hero-ctas">
-        <a href="#contact" class="btn btn-dark">Start my website</a>
-        <a href="#work" class="btn btn-light">See our work</a>
+        <a href="#contact" class="btn btn-dark" data-i18n="hero.start">Làm website cho tôi</a>
+        <a href="#work" class="btn btn-light" data-i18n="hero.work">Xem dự án</a>
       </div>
     </div>
   </section>
 
-  <!-- 3. Ticker -->
+  <!-- 3. Ticker (brand words, kept in English in both languages) -->
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
       <span>FAST</span><span>PRO</span><span>CHEAP</span><span>LIVE</span>
@@ -66,22 +71,22 @@
   <!-- 4. How we sling it -->
   <section class="section" id="how" aria-labelledby="how-title">
     <div class="wrap">
-      <h2 id="how-title">How we sling it</h2>
+      <h2 id="how-title" data-i18n="how.title">3 bước là có website</h2>
       <ol class="steps">
         <li class="card step">
           <span class="step-num">01</span>
-          <h3>Share the idea</h3>
-          <p>DM us on Instagram. Tell us about your business, what you sell and a site you like.</p>
+          <h3 data-i18n="how.s1.title">Chia sẻ ý tưởng</h3>
+          <p data-i18n="how.s1.text">Nhắn tin cho chúng mình qua Instagram. Kể về việc kinh doanh của bạn, bạn bán gì và một website bạn thích.</p>
         </li>
         <li class="card step">
           <span class="step-num">02</span>
-          <h3>We build fast</h3>
-          <p>We design and build your site, then send you a preview link to check and tweak.</p>
+          <h3 data-i18n="how.s2.title">Làm nhanh, làm đẹp</h3>
+          <p data-i18n="how.s2.text">Chúng mình thiết kế và xây dựng website, rồi gửi bạn link xem trước để góp ý và chỉnh sửa.</p>
         </li>
         <li class="card step">
           <span class="step-num">03</span>
-          <h3>Go live</h3>
-          <p>Your site is online in 7–14 days, working great on every phone.</p>
+          <h3 data-i18n="how.s3.title">Lên sóng</h3>
+          <p data-i18n="how.s3.text">Website của bạn online sau 7–14 ngày, hiển thị đẹp trên mọi điện thoại.</p>
         </li>
       </ol>
     </div>
@@ -90,18 +95,19 @@
   <!-- 5. Proof -->
   <section class="section section-alt" id="work" aria-labelledby="work-title">
     <div class="wrap">
-      <h2 id="work-title">Proof it's real</h2>
+      <h2 id="work-title" data-i18n="work.title">Dự án thật, kết quả thật</h2>
       <div class="projects">
         <article class="card project">
           <div class="shot">
             <div class="shot-bar"><i></i><i></i><i></i></div>
             <img src="img/stellar-boutique-hotel.webp" width="800" height="500" loading="lazy" decoding="async"
-                 alt="Stellar Boutique Hotel homepage: dark green hero with the headline in Vietnamese and booking buttons">
+                 data-i18n-alt="work.p1.alt"
+                 alt="Trang chủ Stellar Boutique Hotel: phần đầu trang màu xanh lá đậm với tiêu đề tiếng Việt và nút đặt phòng">
           </div>
           <div class="project-info">
             <h3><a href="https://stellar-boutique-hotel.vercel.app" target="_blank" rel="noopener">Stellar Boutique Hotel</a></h3>
-            <p>Boutique hotel · Phú Mỹ Hưng, HCMC</p>
-            <span class="project-cta" aria-hidden="true">View live site ↗</span>
+            <p data-i18n="work.p1.meta">Khách sạn boutique · Phú Mỹ Hưng, TP.HCM</p>
+            <span class="project-cta" aria-hidden="true" data-i18n="work.view">Xem website ↗</span>
           </div>
         </article>
         <article class="card project">
@@ -137,41 +143,41 @@
   <!-- 6. Pricing -->
   <section class="section" id="pricing" aria-labelledby="pricing-title">
     <div class="wrap">
-      <h2 id="pricing-title">Cheap. Not cheap-looking.</h2>
+      <h2 id="pricing-title" data-i18n="pricing.title">Giá rẻ. Nhìn không hề rẻ.</h2>
       <div class="plans">
         <article class="card plan">
-          <h3>Starter</h3>
-          <p class="price">200,000&nbsp;₫</p>
-          <p class="price-note">One-page site</p>
+          <h3 data-i18n="plan1.name">Cơ bản</h3>
+          <p class="price" data-i18n="plan1.price">200.000&nbsp;₫</p>
+          <p class="price-note" data-i18n="plan1.note">Website 1 trang</p>
           <ul>
-            <li>Mobile-first design</li>
-            <li>Instagram &amp; contact links</li>
-            <li>Live in 7–14 days</li>
+            <li data-i18n="plan1.f1">Thiết kế ưu tiên điện thoại</li>
+            <li data-i18n="plan1.f2">Liên kết Instagram &amp; liên hệ</li>
+            <li data-i18n="plan1.f3">Lên sóng trong 7–14 ngày</li>
           </ul>
-          <a href="#contact" class="btn btn-light">Get started</a>
+          <a href="#contact" class="btn btn-light" data-i18n="plan1.cta">Bắt đầu</a>
         </article>
         <article class="card plan plan-featured">
-          <span class="badge">Most popular</span>
-          <h3>Multi-page</h3>
-          <p class="price">+100,000&nbsp;₫</p>
-          <p class="price-note">per extra page</p>
+          <span class="badge" data-i18n="plan2.badge">Phổ biến nhất</span>
+          <h3 data-i18n="plan2.name">Nhiều trang</h3>
+          <p class="price" data-i18n="plan2.price">+100.000&nbsp;₫</p>
+          <p class="price-note" data-i18n="plan2.note">mỗi trang thêm</p>
           <ul>
-            <li>Everything in Starter</li>
-            <li>Menu, services, gallery, about…</li>
-            <li>Example: 5 pages = 600,000&nbsp;₫</li>
+            <li data-i18n="plan2.f1">Mọi thứ trong gói Cơ bản</li>
+            <li data-i18n="plan2.f2">Thực đơn, dịch vụ, thư viện ảnh, giới thiệu…</li>
+            <li data-i18n="plan2.f3">Ví dụ: 5 trang = 600.000&nbsp;₫</li>
           </ul>
-          <a href="#contact" class="btn btn-dark">Get a quote</a>
+          <a href="#contact" class="btn btn-dark" data-i18n="cta.quote">Nhận báo giá</a>
         </article>
         <article class="card plan">
-          <h3>Custom</h3>
-          <p class="price">Let's talk</p>
-          <p class="price-note">Bigger ideas</p>
+          <h3 data-i18n="plan3.name">Theo yêu cầu</h3>
+          <p class="price" data-i18n="plan3.price">Cùng trao đổi</p>
+          <p class="price-note" data-i18n="plan3.note">Cho ý tưởng lớn hơn</p>
           <ul>
-            <li>Booking or ordering flows</li>
-            <li>Special features</li>
-            <li>Quoted for your project</li>
+            <li data-i18n="plan3.f1">Đặt lịch hoặc đặt hàng online</li>
+            <li data-i18n="plan3.f2">Tính năng đặc biệt</li>
+            <li data-i18n="plan3.f3">Báo giá theo dự án</li>
           </ul>
-          <a href="#contact" class="btn btn-light">Ask us</a>
+          <a href="#contact" class="btn btn-light" data-i18n="plan3.cta">Hỏi chúng mình</a>
         </article>
       </div>
     </div>
@@ -180,10 +186,10 @@
   <!-- 7. Contact -->
   <section class="contact" id="contact" aria-labelledby="contact-title">
     <div class="wrap contact-inner">
-      <h2 id="contact-title">Got an idea? Let's sling it.</h2>
-      <p>Send us a DM with what your business does. We'll reply with a quote.</p>
+      <h2 id="contact-title" data-i18n="contact.title">Có ý tưởng? Làm luôn nào!</h2>
+      <p data-i18n="contact.text">Nhắn tin cho chúng mình về việc kinh doanh của bạn. Chúng mình sẽ gửi báo giá.</p>
       <div class="contact-ctas">
-        <a href="https://instagram.com/webslingers.sg" class="btn btn-dark" target="_blank" rel="noopener">Get a quote on Instagram</a>
+        <a href="https://instagram.com/webslingers.sg" class="btn btn-dark" target="_blank" rel="noopener" data-i18n="contact.ig">Nhận báo giá qua Instagram</a>
         <a href="https://instagram.com/webslingers.sg" class="contact-link" target="_blank" rel="noopener">@webslingers.sg</a>
         <a href="mailto:ryannguyen101209@gmail.com" class="contact-link">ryannguyen101209@gmail.com</a>
       </div>
@@ -195,7 +201,7 @@
 <footer class="footer">
   <div class="wrap footer-inner">
     <p class="logo">WEBSLINGERS<span>.INC</span></p>
-    <p>Websites for small businesses in Vietnam.</p>
+    <p data-i18n="footer.tag">Website cho doanh nghiệp nhỏ tại Việt Nam.</p>
     <p>© <span id="year">2026</span> Webslingers.inc</p>
   </div>
 </footer>

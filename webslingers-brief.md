@@ -41,4 +41,4 @@ Playful neo-brutalist: thick black borders, hard offset shadows, big chunky head
 - ~~[EMAIL]~~ ryannguyen101209@gmail.com (done)
 - 2 more project screenshots (project 1 = Stellar Boutique Hotel, done; 2 and 3 still mockups)
 - Optional client testimonial
-- Vietnamese copy (recommended: Vietnamese first, English toggle)
+- ~~Vietnamese copy~~ done: Vietnamese first, EN toggle (native speaker should proofread)
