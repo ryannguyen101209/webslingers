@@ -1,7 +1,7 @@
 // Vietnamese is written in index.html (the default). English lives here.
 // Each key matches a data-i18n / data-i18n-<attr> attribute in the page.
 const EN = {
-  'meta.title': 'Webslingers.inc — From idea to live in record time',
+  'meta.title': 'Webslingers.inc | From idea to live in record time',
   'meta.desc': 'Webslingers builds professional-looking websites for small businesses in Vietnam. Live in 7–14 days, from 200,000 ₫.',
   'skip': 'Skip to content',
   'nav.home': 'Webslingers.inc home',
@@ -15,9 +15,25 @@ const EN = {
   'cta.quote': 'Get a quote',
   'hero.eyebrow': 'Websites for small businesses in Vietnam',
   'hero.title': 'From idea to <mark>live</mark> in record time.',
-  'hero.lede': 'A professional website for your shop, café or studio — built in 7–14 days, from 200,000&nbsp;₫.',
+  'hero.lede': 'A professional website for your shop, café or studio. Built in 7–14 days, from 200,000&nbsp;₫.',
   'hero.start': 'Start my website',
-  'hero.work': 'See our work',
+  'hero.try': 'Try a design now',
+  'hero.hint': 'Tip: tap any empty space to sling a web',
+  'try.title': 'Try your website',
+  'try.lede': 'Type a name, pick your business and a colour. The preview changes as you go.',
+  'try.name': 'Business name',
+  'try.namePh': 'e.g. Pho Co Ba',
+  'try.type': 'What do you do?',
+  'type.cafe': 'Café',
+  'type.food': 'Restaurant',
+  'type.shop': 'Shop',
+  'type.salon': 'Salon &amp; spa',
+  'try.color': 'Main colour',
+  'color.coral': 'Coral red',
+  'color.gold': 'Yellow',
+  'color.green': 'Green',
+  'color.blue': 'Blue',
+  'try.cta': 'Price this design',
   'how.title': 'How we sling it',
   'how.s1.title': 'Share the idea',
   'how.s1.text': 'DM us on Instagram. Tell us about your business, what you sell and a site you like.',
@@ -36,8 +52,9 @@ const EN = {
   'plan1.f1': 'Mobile-first design',
   'plan1.f2': 'Instagram &amp; contact links',
   'plan1.f3': 'Live in 7–14 days',
-  'plan1.cta': 'Get started',
-  'plan2.badge': 'Most popular',
+  'plan1.cta': 'Pick 1 page',
+  'plan2.badge': 'Price it yourself',
+  'plan2.cta': 'Price 5 pages',
   'plan2.name': 'Multi-page',
   'plan2.price': '+100,000&nbsp;₫',
   'plan2.note': 'per extra page',
@@ -52,13 +69,22 @@ const EN = {
   'plan3.f3': 'Quoted for your project',
   'plan3.cta': 'Ask us',
   'contact.title': "Got an idea? Let's sling it.",
+  'calc.title': 'Quote calculator',
+  'calc.pages': 'Number of pages',
+  'calc.minus': 'One page fewer',
+  'calc.plus': 'One more page',
+  'calc.pagesUnit': 'pages',
+  'calc.total': 'Estimate',
+  'calc.ig': 'Copy message &amp; open Instagram',
+  'calc.mail': 'Send by email',
+  'calc.msgLabel': 'Quote message',
   'contact.text': "Send us a DM with what your business does. We'll reply with a quote.",
   'contact.ig': 'Get a quote on Instagram',
   'footer.tag': 'Websites for small businesses in Vietnam.',
 };
 
 (function () {
-  const ATTRS = ['alt', 'content', 'aria-label'];
+  const ATTRS = ['alt', 'content', 'aria-label', 'placeholder'];
   const nodes = [];
   document.querySelectorAll('[data-i18n]').forEach(el => {
     nodes.push({ el, key: el.dataset.i18n, vi: el.innerHTML, set: v => { el.innerHTML = v; } });
@@ -78,6 +104,8 @@ const EN = {
     document.documentElement.lang = lang;
     otherLabel.lang = lang === 'en' ? 'vi' : 'en';
     toggle.lang = otherLabel.lang;
+    // app.js re-renders its dynamic text (preview, quote, dates) on this event.
+    document.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
   }
 
   let lang = 'vi';

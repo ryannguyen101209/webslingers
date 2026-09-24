@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n="meta.title">Webslingers.inc — Từ ý tưởng đến lên sóng trong thời gian kỷ lục</title>
+<title data-i18n="meta.title">Webslingers.inc | Từ ý tưởng đến lên sóng trong thời gian kỷ lục</title>
 <meta name="description" data-i18n-content="meta.desc" content="Webslingers làm website chuyên nghiệp cho doanh nghiệp nhỏ tại Việt Nam. Lên sóng trong 7–14 ngày, chỉ từ 200.000 ₫.">
 <meta name="theme-color" content="#fff3d1">
 <link rel="icon" href="img/logo-mark.svg" type="image/svg+xml">
@@ -18,7 +18,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js');</script>
 <script src="i18n.js" defer></script>
+<script src="app.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main" data-i18n="skip">Bỏ qua đến nội dung</a>
@@ -43,7 +45,7 @@
 
 <main id="main">
 
-  <!-- 2. Hero -->
+  <!-- Hero. Tapping empty space slings a web line from the top-right corner (app.js). -->
   <section class="hero" id="top">
     <svg class="hero-web" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
       <g fill="none" stroke="#111" stroke-width="1.2">
@@ -55,18 +57,20 @@
         <path d="M40 84 Q90 250 168 248 Q240 410 330 440 Q400 490 465 474"/>
       </g>
     </svg>
+    <svg class="sling-layer" id="slingLayer" aria-hidden="true" focusable="false"></svg>
     <div class="wrap hero-inner">
       <p class="eyebrow" data-i18n="hero.eyebrow">Website cho doanh nghiệp nhỏ tại Việt Nam</p>
       <h1 data-i18n="hero.title">Từ ý tưởng đến <mark>lên sóng</mark> trong thời gian kỷ lục.</h1>
-      <p class="lede" data-i18n="hero.lede">Website chuyên nghiệp cho cửa hàng, quán cà phê hay studio của bạn — hoàn thành trong 7–14 ngày, chỉ từ 200.000&nbsp;₫.</p>
+      <p class="lede" data-i18n="hero.lede">Website chuyên nghiệp cho cửa hàng, quán cà phê hay studio của bạn. Hoàn thành trong 7–14 ngày, chỉ từ 200.000&nbsp;₫.</p>
       <div class="hero-ctas">
         <a href="#contact" class="btn btn-dark" data-i18n="hero.start">Làm website cho tôi</a>
-        <a href="#work" class="btn btn-light" data-i18n="hero.work">Xem dự án</a>
+        <a href="#try" class="btn btn-light needs-js" data-i18n="hero.try">Thử thiết kế ngay</a>
       </div>
+      <p class="sling-hint" id="slingHint" hidden data-i18n="hero.hint">Mẹo: chạm vào khoảng trống để giăng tơ</p>
     </div>
   </section>
 
-  <!-- 3. Ticker (brand words, kept in English in both languages) -->
+  <!-- Ticker (brand words, kept in English in both languages) -->
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
       <span>FAST</span><span>PRO</span><span>CHEAP</span><span>LIVE</span>
@@ -76,22 +80,75 @@
     </div>
   </div>
 
-  <!-- 4. How we sling it -->
+  <!-- Try it: live preview builder -->
+  <section class="section try needs-js" id="try" aria-labelledby="try-title">
+    <div class="wrap">
+      <h2 id="try-title" data-i18n="try.title">Thử xem website của bạn</h2>
+      <p class="section-lede" data-i18n="try.lede">Gõ tên, chọn kiểu kinh doanh và màu. Bản xem trước đổi ngay khi bạn chọn.</p>
+      <div class="try-grid">
+        <form class="card try-controls reveal" id="builder" onsubmit="return false">
+          <label class="field">
+            <span class="field-label" data-i18n="try.name">Tên doanh nghiệp</span>
+            <input type="text" id="bizName" maxlength="28" autocomplete="organization"
+                   data-i18n-placeholder="try.namePh" placeholder="VD: Phở Cô Ba">
+          </label>
+
+          <fieldset class="field">
+            <legend class="field-label" data-i18n="try.type">Bạn kinh doanh gì?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="bizType" value="cafe" checked><span data-i18n="type.cafe">Quán cà phê</span></label>
+              <label class="chip"><input type="radio" name="bizType" value="food"><span data-i18n="type.food">Nhà hàng</span></label>
+              <label class="chip"><input type="radio" name="bizType" value="shop"><span data-i18n="type.shop">Cửa hàng</span></label>
+              <label class="chip"><input type="radio" name="bizType" value="salon"><span data-i18n="type.salon">Salon &amp; spa</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend class="field-label" data-i18n="try.color">Màu chủ đạo</legend>
+            <div class="swatches">
+              <label class="swatch" style="--sw:#ff6a5c"><input type="radio" name="bizColor" value="coral" checked><span class="sr-only" data-i18n="color.coral">Đỏ san hô</span></label>
+              <label class="swatch" style="--sw:#ffcd00"><input type="radio" name="bizColor" value="gold"><span class="sr-only" data-i18n="color.gold">Vàng</span></label>
+              <label class="swatch" style="--sw:#1f7a4d"><input type="radio" name="bizColor" value="green"><span class="sr-only" data-i18n="color.green">Xanh lá</span></label>
+              <label class="swatch" style="--sw:#2b59c3"><input type="radio" name="bizColor" value="blue"><span class="sr-only" data-i18n="color.blue">Xanh dương</span></label>
+            </div>
+          </fieldset>
+
+          <a href="#calc" class="btn btn-dark try-cta" id="tryToQuote" data-calc data-i18n="try.cta">Tính giá cho bản này</a>
+        </form>
+
+        <div class="phone reveal" id="preview" aria-hidden="true">
+          <div class="phone-notch"></div>
+          <div class="mini" data-color="coral">
+            <div class="mini-nav"><b class="mini-name" id="pvName"></b><i></i></div>
+            <div class="mini-hero">
+              <p class="mini-title" id="pvTitle"></p>
+              <span class="mini-btn" id="pvBtn"></span>
+            </div>
+            <div class="mini-grid" id="pvItems"></div>
+            <div class="mini-foot">@instagram · Google Maps</div>
+          </div>
+        </div>
+        <p class="sr-only" id="pvSummary" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we sling it -->
   <section class="section" id="how" aria-labelledby="how-title">
     <div class="wrap">
       <h2 id="how-title" data-i18n="how.title">3 bước là có website</h2>
       <ol class="steps">
-        <li class="card step">
+        <li class="card step reveal">
           <span class="step-num">01</span>
           <h3 data-i18n="how.s1.title">Chia sẻ ý tưởng</h3>
           <p data-i18n="how.s1.text">Nhắn tin cho chúng mình qua Instagram. Kể về việc kinh doanh của bạn, bạn bán gì và một website bạn thích.</p>
         </li>
-        <li class="card step">
+        <li class="card step reveal">
           <span class="step-num">02</span>
           <h3 data-i18n="how.s2.title">Làm nhanh, làm đẹp</h3>
           <p data-i18n="how.s2.text">Chúng mình thiết kế và xây dựng website, rồi gửi bạn link xem trước để góp ý và chỉnh sửa.</p>
         </li>
-        <li class="card step">
+        <li class="card step reveal">
           <span class="step-num">03</span>
           <h3 data-i18n="how.s3.title">Lên sóng</h3>
           <p data-i18n="how.s3.text">Website của bạn online sau 7–14 ngày, hiển thị đẹp trên mọi điện thoại.</p>
@@ -100,12 +157,12 @@
     </div>
   </section>
 
-  <!-- 5. Proof -->
+  <!-- Proof -->
   <section class="section section-alt" id="work" aria-labelledby="work-title">
     <div class="wrap">
       <h2 id="work-title" data-i18n="work.title">Dự án thật, kết quả thật</h2>
       <div class="projects">
-        <article class="card project">
+        <article class="card project reveal">
           <div class="shot">
             <div class="shot-bar"><i></i><i></i><i></i></div>
             <img src="img/stellar-boutique-hotel.webp" width="800" height="500" loading="lazy" decoding="async"
@@ -118,7 +175,7 @@
             <span class="project-cta" aria-hidden="true" data-i18n="work.view">Xem website ↗</span>
           </div>
         </article>
-        <article class="card project">
+        <article class="card project reveal">
           <div class="shot shot-2" role="img" aria-label="[PROJECT 2 SCREENSHOT]">
             <div class="shot-bar"><i></i><i></i><i></i></div>
             <div class="shot-body"><b></b><s></s><s></s><u></u></div>
@@ -128,7 +185,7 @@
             <p>[Business type] · [City]</p>
           </div>
         </article>
-        <article class="card project">
+        <article class="card project reveal">
           <div class="shot shot-3" role="img" aria-label="[PROJECT 3 SCREENSHOT]">
             <div class="shot-bar"><i></i><i></i><i></i></div>
             <div class="shot-body"><b></b><s></s><s></s><u></u></div>
@@ -148,7 +205,7 @@
     </div>
   </section>
 
-  <!-- 6. Pricing -->
+  <!-- Pricing -->
   <section class="section" id="pricing" aria-labelledby="pricing-title">
     <div class="wrap">
       <h2 id="pricing-title" data-i18n="pricing.title">Giá rẻ. Nhìn không hề rẻ.</h2>
@@ -162,10 +219,10 @@
             <li data-i18n="plan1.f2">Liên kết Instagram &amp; liên hệ</li>
             <li data-i18n="plan1.f3">Lên sóng trong 7–14 ngày</li>
           </ul>
-          <a href="#contact" class="btn btn-light" data-i18n="plan1.cta">Bắt đầu</a>
+          <a href="#contact" class="btn btn-light" data-calc data-pages="1" data-i18n="plan1.cta">Chọn 1 trang</a>
         </article>
         <article class="card plan plan-featured">
-          <span class="badge" data-i18n="plan2.badge">Phổ biến nhất</span>
+          <a href="#calc" class="badge needs-js" data-calc data-i18n="plan2.badge">Tự tính giá</a>
           <h3 data-i18n="plan2.name">Nhiều trang</h3>
           <p class="price" data-i18n="plan2.price">+100.000&nbsp;₫</p>
           <p class="price-note" data-i18n="plan2.note">mỗi trang thêm</p>
@@ -174,7 +231,7 @@
             <li data-i18n="plan2.f2">Thực đơn, dịch vụ, thư viện ảnh, giới thiệu…</li>
             <li data-i18n="plan2.f3">Ví dụ: 5 trang = 600.000&nbsp;₫</li>
           </ul>
-          <a href="#contact" class="btn btn-dark" data-i18n="cta.quote">Nhận báo giá</a>
+          <a href="#contact" class="btn btn-dark" data-calc data-pages="5" data-i18n="plan2.cta">Tính giá 5 trang</a>
         </article>
         <article class="card plan">
           <h3 data-i18n="plan3.name">Theo yêu cầu</h3>
@@ -188,10 +245,41 @@
           <a href="#contact" class="btn btn-light" data-i18n="plan3.cta">Hỏi chúng mình</a>
         </article>
       </div>
+
+      <!-- Quote calculator -->
+      <div class="card calc reveal needs-js" id="calc" tabindex="-1" role="region" aria-labelledby="calc-title">
+        <div class="calc-main">
+          <h3 id="calc-title" data-i18n="calc.title">Máy tính báo giá</h3>
+          <p class="calc-for" id="calcFor"></p>
+          <div class="stepper" role="group" data-i18n-aria-label="calc.pages" aria-label="Số trang">
+            <button type="button" class="step-btn" id="pagesMinus" data-i18n-aria-label="calc.minus" aria-label="Bớt 1 trang">−</button>
+            <label class="stepper-value">
+              <input type="number" id="pages" min="1" max="20" value="1" inputmode="numeric">
+              <span data-i18n="calc.pagesUnit">trang</span>
+            </label>
+            <button type="button" class="step-btn" id="pagesPlus" data-i18n-aria-label="calc.plus" aria-label="Thêm 1 trang">+</button>
+          </div>
+          <ul class="page-tags" id="pageTags" aria-hidden="true"></ul>
+        </div>
+        <div class="calc-result">
+          <p class="calc-label" data-i18n="calc.total">Tạm tính</p>
+          <p class="calc-total" id="calcTotal">200.000&nbsp;₫</p>
+          <p class="sr-only" id="calcLive" aria-live="polite"></p>
+          <p class="calc-formula" id="calcFormula"></p>
+          <p class="calc-date" id="calcDate"></p>
+          <div class="calc-actions">
+            <a class="btn btn-dark" id="sendIg" href="https://instagram.com/webslingers.sg" target="_blank" rel="noopener" data-i18n="calc.ig">Copy tin nhắn &amp; mở Instagram</a>
+            <a class="btn btn-light" id="sendMail" href="mailto:ryannguyen101209@gmail.com" data-i18n="calc.mail">Gửi qua email</a>
+          </div>
+          <p class="calc-status" id="calcStatus" role="status"></p>
+          <textarea class="calc-fallback" id="calcFallback" readonly rows="4" hidden
+                    data-i18n-aria-label="calc.msgLabel" aria-label="Tin nhắn báo giá"></textarea>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 7. Contact -->
+  <!-- Contact -->
   <section class="contact" id="contact" aria-labelledby="contact-title">
     <div class="wrap contact-inner">
       <h2 id="contact-title" data-i18n="contact.title">Có ý tưởng? Làm luôn nào!</h2>
@@ -205,7 +293,6 @@
   </section>
 </main>
 
-<!-- 8. Footer -->
 <footer class="footer">
   <div class="wrap footer-inner">
     <p class="logo"><img src="img/logo-wordmark-dark.webp" width="702" height="120" alt="Webslingers.inc" loading="lazy"></p>
