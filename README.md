@@ -8,7 +8,7 @@ Plain static HTML/CSS, no build step.
 - `index.html` — the page
 - `styles.css` — styles (mobile first)
 - `i18n.js` — English text and the VI/EN switch (Vietnamese is the default, written in `index.html`)
-- `img/` — project screenshots
+- `img/` — logo (`logo-mark.svg` icon, `logo-wordmark*.webp`), favicons, share image (`og.jpg`) and project screenshots
 - `webslingers-brief.md` — design brief and outstanding placeholders
 
 ## Languages
