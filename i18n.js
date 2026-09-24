@@ -18,7 +18,7 @@ const EN = {
   'hero.lede': 'A professional website for your shop, café or studio. Built in 7–14 days, from 200,000&nbsp;₫.',
   'hero.start': 'Start my website',
   'hero.try': 'Try a design now',
-  'hero.hint': 'Tip: tap any empty space to sling a web',
+  'hero.hint': 'Tap to sling a web!',
   'try.title': 'Try your website',
   'try.lede': 'Type a name, pick your business and a colour. The preview changes as you go.',
   'try.name': 'Business name',

@@ -282,8 +282,9 @@
     setTimeout(() => g.remove(), 2000);
   }
 
-  hero.addEventListener('pointerdown', e => {
-    if (e.button !== 0 || e.target.closest('a, button, input, label')) return;
+  // 'click' (not pointerdown) so a finger that starts a scroll on phones doesn't fire a web.
+  hero.addEventListener('click', e => {
+    if (e.target.closest('a, button, input, label')) return;
     const r = hero.getBoundingClientRect();
     sling(e.clientX - r.left, e.clientY - r.top);
     hint.classList.add('done');
