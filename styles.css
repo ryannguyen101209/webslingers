@@ -216,6 +216,27 @@ a { color: inherit; }
 .footer { background: var(--ink); color: var(--cream); padding: 2rem 0; }
 .footer-inner { display: flex; flex-direction: column; gap: .5rem; }
 .footer .logo img { height: 30px; }
+.footer-links { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
+.footer-links a { display: inline-block; padding: .6rem 0; font-weight: 700; color: var(--cream); text-underline-offset: 4px; }
+.footer-links a:hover { color: var(--gold); }
+.footer :focus-visible { outline-color: var(--cream); }
+
+/* Legal pages (privacy.html, terms.html) */
+html[lang="en"] [data-lang="vi"], html[lang="vi"] [data-lang="en"] { display: none; }
+.legal { padding: 3rem 0 4.5rem; }
+.legal-card { max-width: 760px; padding: 1.5rem; }
+.legal h1 { font-size: clamp(1.8rem, 7vw, 2.8rem); font-weight: 900; }
+.legal .updated { font-weight: 700; margin-top: .75rem; }
+.legal h2 { font-size: 1.15rem; margin: 2rem 0 .6rem; }
+.legal p, .legal li { max-width: 68ch; }
+.legal p + p { margin-top: .75rem; }
+.legal ul { padding-left: 1.2rem; margin: .5rem 0 0; }
+.legal li + li { margin-top: .35rem; }
+.legal a { font-weight: 700; text-underline-offset: 3px; }
+.legal .todo { background: var(--gold); padding: 0 .25em; border-radius: 4px; font-weight: 800; }
+.legal-back { display: inline-block; margin-bottom: 1.5rem; padding: .6rem 0; font-weight: 800; }
+.legal-note { margin-top: 2rem; padding: 1rem; border: 2px dashed var(--ink); border-radius: 12px; font-size: .95rem; }
+@media (min-width: 720px) { .legal-card { padding: 2.5rem 3rem; } }
 
 /* ---------- Shared helpers ---------- */
 .sr-only {

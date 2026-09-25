@@ -10,6 +10,7 @@ Plain static HTML/CSS, no build step.
 - `i18n.js` — English text and the VI/EN switch (Vietnamese is the default, written in `index.html`)
 - `app.js` — interactive features (see below)
 - `img/` — logo (`logo-mark.svg` icon, `logo-wordmark*.webp`), favicons, share image (`og.jpg`) and project screenshots
+- `privacy.html`, `terms.html` — privacy policy and terms of use (VI + EN, linked from the footer). Terms still has [BRACKET] business decisions to fill in
 - `webslingers-brief.md` — design brief and outstanding placeholders
 
 ## Languages

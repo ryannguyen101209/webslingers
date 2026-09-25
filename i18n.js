@@ -81,6 +81,14 @@ const EN = {
   'contact.text': "Send us a DM with what your business does. We'll reply with a quote.",
   'contact.ig': 'Get a quote on Instagram',
   'footer.tag': 'Websites for small businesses in Vietnam.',
+  'footer.legal': 'Legal',
+  'footer.privacy': 'Privacy policy',
+  'footer.terms': 'Terms of use',
+  'legal.back': '← Back to home',
+  'privacy.title': 'Privacy policy | Webslingers.inc',
+  'privacy.desc': 'How Webslingers.inc collects, uses and protects your information.',
+  'terms.title': 'Terms of use | Webslingers.inc',
+  'terms.desc': 'Terms for using the Webslingers.inc website and web design services.',
 };
 
 (function () {
