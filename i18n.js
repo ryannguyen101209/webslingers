@@ -75,6 +75,7 @@ const EN = {
   'calc.plus': 'One more page',
   'calc.pagesUnit': 'pages',
   'calc.total': 'Estimate',
+  'calc.lead': 'Send quote request',
   'calc.ig': 'Copy message &amp; open Instagram',
   'calc.mail': 'Send by email',
   'calc.msgLabel': 'Quote message',

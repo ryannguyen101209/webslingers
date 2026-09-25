@@ -3,6 +3,10 @@
 (function () {
   const IG_URL = 'https://instagram.com/webslingers.sg';
   const EMAIL = 'ryannguyen101209@gmail.com';
+  // Set this to turn quote requests into a real lead list instead of only Instagram DMs:
+  // sign up free at formspree.io, create a form, and paste its ID here (e.g. 'mzzarrqp').
+  // Leave it blank to keep the site exactly as it is now — see README.md for the 2-minute setup.
+  const FORMSPREE_ID = '';
   const BASE = 200000;
   const PER_PAGE = 100000;
   const MAX_PAGES = 20;
@@ -62,6 +66,11 @@
       subject: who => `Báo giá website: ${who}`,
       copied: 'Đã copy tin nhắn! Dán vào tin nhắn Instagram là xong.',
       copyFail: 'Không copy tự động được. Bạn copy tin nhắn bên dưới rồi gửi qua Instagram nhé.',
+      viewSite: 'Xem website ↗',
+      placeholderAlt: 'Ảnh chụp màn hình dự án sắp có',
+      sending: 'Đang gửi...',
+      sent: 'Đã gửi! Tụi mình sẽ nhắn lại sớm qua Instagram hoặc email.',
+      sendFail: 'Gửi không thành công. Bạn copy tin nhắn bên dưới rồi gửi qua Instagram hoặc email nhé.',
     },
     en: {
       emptyName: 'Your business',
@@ -79,6 +88,11 @@
       subject: who => `Website quote: ${who}`,
       copied: 'Message copied! Paste it into an Instagram DM.',
       copyFail: "Couldn't copy automatically. Copy the message below and send it on Instagram.",
+      viewSite: 'View live site ↗',
+      placeholderAlt: 'Project screenshot coming soon',
+      sending: 'Sending...',
+      sent: "Sent! We'll get back to you soon on Instagram or email.",
+      sendFail: "Couldn't send that. Copy the message below and send it on Instagram or email.",
     },
   };
 
@@ -127,6 +141,69 @@
   document.querySelectorAll('input[name="bizColor"]').forEach(r => r.addEventListener('change', () => {
     state.color = r.value; renderPreview(); bump();
   }));
+
+  /* ---------- Projects grid (data lives in projects.js) ---------- */
+  const SHOT_CLASSES = ['', 'shot-2', 'shot-3']; // cycles for placeholders past the 3rd
+  let projectsRendered = false;
+  function renderProjects() {
+    const grid = $('projectsGrid');
+    const list = window.PROJECTS;
+    if (!grid || !Array.isArray(list) || !list.length) return; // keep the static HTML fallback
+    // The very first render hands its cards to the scroll-reveal observer below, which
+    // animates them in. A later re-render (language switch) fully replaces those nodes,
+    // so it marks them already revealed instead of leaving new, unobserved elements at
+    // opacity 0 forever.
+    const alreadyRevealed = projectsRendered;
+    projectsRendered = true;
+    grid.replaceChildren(...list.map((proj, i) => {
+      const copy = proj[lang()] || proj.vi || {};
+      const article = document.createElement('article');
+      article.className = 'card project reveal' + (alreadyRevealed ? ' in landed' : '');
+
+      const shot = document.createElement('div');
+      shot.className = 'shot' + (proj.image ? '' : ' ' + SHOT_CLASSES[i % SHOT_CLASSES.length]);
+      const bar = document.createElement('div');
+      bar.className = 'shot-bar';
+      bar.append(document.createElement('i'), document.createElement('i'), document.createElement('i'));
+      shot.appendChild(bar);
+      if (proj.image) {
+        const img = document.createElement('img');
+        img.src = proj.image; img.width = 800; img.height = 500;
+        img.loading = 'lazy'; img.decoding = 'async';
+        img.alt = copy.alt || t().placeholderAlt;
+        shot.appendChild(img);
+      } else {
+        shot.setAttribute('role', 'img');
+        shot.setAttribute('aria-label', copy.alt || proj.name || t().placeholderAlt);
+        const body = document.createElement('div');
+        body.className = 'shot-body';
+        body.append(...['b', 's', 's', 'u'].map(tag => document.createElement(tag)));
+        shot.appendChild(body);
+      }
+      article.appendChild(shot);
+
+      const info = document.createElement('div');
+      info.className = 'project-info';
+      const h3 = document.createElement('h3');
+      if (proj.url) {
+        const a = document.createElement('a');
+        a.href = proj.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = proj.name;
+        h3.appendChild(a);
+      } else {
+        h3.textContent = proj.name;
+      }
+      const meta = document.createElement('p');
+      meta.textContent = `${copy.type || ''} · ${copy.city || ''}`;
+      info.append(h3, meta);
+      if (proj.url) {
+        const cta = document.createElement('span');
+        cta.className = 'project-cta'; cta.setAttribute('aria-hidden', 'true'); cta.textContent = t().viewSite;
+        info.appendChild(cta);
+      }
+      article.appendChild(info);
+      return article;
+    }));
+  }
 
   /* ---------- Quote calculator ---------- */
   const pagesInput = $('pages');
@@ -243,6 +320,47 @@
   }
   igLink.addEventListener('click', () => copyText(message()));
 
+  // Optional: submit the quote straight to Formspree (a real lead list) instead of only
+  // relying on the visitor to DM. Fully inert — button stays hidden — until FORMSPREE_ID
+  // is set above, so there is never a visible control with nothing behind it.
+  const leadBtn = $('sendLead');
+  if (FORMSPREE_ID) {
+    leadBtn.hidden = false;
+    igLink.classList.replace('btn-dark', 'btn-light'); // the lead form becomes the one accent CTA
+    leadBtn.addEventListener('click', async () => {
+      const c = typeCopy();
+      const n = state.pages;
+      leadBtn.disabled = true;
+      const prevLabel = leadBtn.textContent;
+      leadBtn.textContent = t().sending;
+      try {
+        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            _subject: t().subject(state.name.trim() || c.name),
+            name: state.name.trim() || t().emptyName,
+            business_type: c.name,
+            pages: n,
+            estimate: fmt(priceFor(n)),
+            language: lang(),
+            message: message(),
+          }),
+        });
+        if (!res.ok) throw new Error('Formspree ' + res.status);
+        statusEl.textContent = t().sent;
+        fallback.hidden = true;
+      } catch (e) {
+        statusEl.textContent = t().sendFail;
+        fallback.value = message();
+        fallback.hidden = false;
+      } finally {
+        leadBtn.disabled = false;
+        leadBtn.textContent = prevLabel;
+      }
+    });
+  }
+
   /* ---------- Hero web-sling ---------- */
   const hero = document.querySelector('.hero');
   const layer = $('slingLayer');
@@ -291,6 +409,10 @@
   });
   hint.hidden = false;
 
+  // Build the projects grid before the reveal observer below scans for `.reveal` elements,
+  // so the cards it just created get the same scroll-in animation as everything else.
+  renderProjects();
+
   /* ---------- Scroll reveal ---------- */
   if (!reduceMotion && 'IntersectionObserver' in window) {
     document.documentElement.classList.add('motion');
@@ -309,7 +431,7 @@
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   }
 
-  document.addEventListener('langchange', () => { renderPreview(); renderCalc(false); });
+  document.addEventListener('langchange', () => { renderPreview(); renderCalc(false); renderProjects(); });
   renderPreview();
   renderCalc(false);
 })();

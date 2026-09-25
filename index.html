@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="styles.css">
 <script>document.documentElement.classList.add('js');</script>
 <script src="i18n.js" defer></script>
+<script src="projects.js" defer></script>
 <script src="app.js" defer></script>
 </head>
 <body>
@@ -170,7 +171,9 @@
   <section class="section section-alt" id="work" aria-labelledby="work-title">
     <div class="wrap">
       <h2 id="work-title" data-i18n="work.title">Dự án thật, kết quả thật</h2>
-      <div class="projects">
+      <!-- Cards are built from projects.js by app.js's renderProjects(), so adding a
+           project is a data edit, not an HTML edit. Static fallback here covers no-JS. -->
+      <div class="projects" id="projectsGrid">
         <article class="card project reveal">
           <div class="shot">
             <div class="shot-bar"><i></i><i></i><i></i></div>
@@ -277,6 +280,9 @@
           <p class="calc-formula" id="calcFormula"></p>
           <p class="calc-date" id="calcDate"></p>
           <div class="calc-actions">
+            <!-- Shown only once FORMSPREE_ID is set in app.js (see README) — a real lead
+                 list, not just DMs. Hidden here so there is never a button that does nothing. -->
+            <button type="button" class="btn btn-dark" id="sendLead" hidden data-i18n="calc.lead">Gửi yêu cầu báo giá</button>
             <a class="btn btn-dark" id="sendIg" href="https://instagram.com/webslingers.sg" target="_blank" rel="noopener" data-i18n="calc.ig">Copy tin nhắn &amp; mở Instagram</a>
             <a class="btn btn-light" id="sendMail" href="mailto:ryannguyen101209@gmail.com" data-i18n="calc.mail">Gửi qua email</a>
           </div>

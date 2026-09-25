@@ -9,6 +9,7 @@ Plain static HTML/CSS, no build step.
 - `styles.css` — styles (mobile first)
 - `i18n.js` — English text and the VI/EN switch (Vietnamese is the default, written in `index.html`)
 - `app.js` — interactive features (see below)
+- `projects.js` — the "Proof it's real" project cards (see below)
 - `img/` — logo (`logo-mark.svg` icon, `logo-wordmark*.webp`), favicons, share image (`og.jpg`) and project screenshots
 - `privacy.html`, `terms.html` — privacy policy and terms of use (VI + EN, linked from the footer). Terms still has [BRACKET] business decisions to fill in
 - `webslingers-brief.md` — design brief and outstanding placeholders
@@ -18,6 +19,27 @@ Plain static HTML/CSS, no build step.
 Vietnamese is the default. The EN/VI button in the nav switches language and remembers the choice.
 Link straight to English with `?lang=en`. To change copy, edit the Vietnamese in `index.html`
 and the English in `i18n.js` (same `data-i18n` key).
+
+## Adding a project (`projects.js`)
+
+The 3 cards in "Proof it's real" are read from the `PROJECTS` array in `projects.js`, so
+adding one is a data edit, not an HTML edit: copy an existing entry, fill in the name, URL,
+screenshot path and the Vietnamese/English type + city, and add the screenshot to `img/`
+(800×500, `.webp`). `index.html` also carries the current 3 cards as plain HTML, so the page
+still shows real content to visitors and search engines with JavaScript off; `app.js` replaces
+it with the live data once it runs, so keep the two roughly in sync when you add a project.
+
+## Getting leads into a real list, not just Instagram DMs
+
+By default the quote calculator's only "send" options are copying a message into Instagram or
+opening an email. To also collect quote requests as a proper list you can check:
+
+1. Go to [formspree.io](https://formspree.io) and make a free account (50 submissions/month free).
+2. Create a form and copy its ID from the dashboard (looks like `mzzarrqp`).
+3. Open `app.js` and set `const FORMSPREE_ID = 'your-id-here';` near the top.
+4. Push the change. A "Send quote request" button appears automatically; nothing else changes.
+
+Leave `FORMSPREE_ID` blank to keep things exactly as they are now.
 
 ## Interactive features (`app.js`)
 
