@@ -68,6 +68,7 @@
       copyFail: 'Không copy tự động được. Bạn copy tin nhắn bên dưới rồi gửi qua Instagram nhé.',
       viewSite: 'Xem website ↗',
       placeholderAlt: 'Ảnh chụp màn hình dự án sắp có',
+      demoBadge: 'VÍ DỤ',
       sending: 'Đang gửi...',
       sent: 'Đã gửi! Tụi mình sẽ nhắn lại sớm qua Instagram hoặc email.',
       sendFail: 'Gửi không thành công. Bạn copy tin nhắn bên dưới rồi gửi qua Instagram hoặc email nhé.',
@@ -90,6 +91,7 @@
       copyFail: "Couldn't copy automatically. Copy the message below and send it on Instagram.",
       viewSite: 'View live site ↗',
       placeholderAlt: 'Project screenshot coming soon',
+      demoBadge: 'EXAMPLE',
       sending: 'Sending...',
       sent: "Sent! We'll get back to you soon on Instagram or email.",
       sendFail: "Couldn't send that. Copy the message below and send it on Instagram or email.",
@@ -160,8 +162,9 @@
       const article = document.createElement('article');
       article.className = 'card project reveal' + (alreadyRevealed ? ' in landed' : '');
 
+      const name = proj.name || copy.name || '';
       const shot = document.createElement('div');
-      shot.className = 'shot' + (proj.image ? '' : ' ' + SHOT_CLASSES[i % SHOT_CLASSES.length]);
+      shot.className = 'shot' + (proj.image ? '' : ' ' + (proj.shotClass || SHOT_CLASSES[i % SHOT_CLASSES.length]));
       const bar = document.createElement('div');
       bar.className = 'shot-bar';
       bar.append(document.createElement('i'), document.createElement('i'), document.createElement('i'));
@@ -174,7 +177,7 @@
         shot.appendChild(img);
       } else {
         shot.setAttribute('role', 'img');
-        shot.setAttribute('aria-label', copy.alt || proj.name || t().placeholderAlt);
+        shot.setAttribute('aria-label', copy.alt || name || t().placeholderAlt);
         const body = document.createElement('div');
         body.className = 'shot-body';
         body.append(...['b', 's', 's', 'u'].map(tag => document.createElement(tag)));
@@ -184,16 +187,22 @@
 
       const info = document.createElement('div');
       info.className = 'project-info';
+      if (proj.demo) {
+        const badge = document.createElement('span');
+        badge.className = 'demo-badge';
+        badge.textContent = t().demoBadge;
+        info.appendChild(badge);
+      }
       const h3 = document.createElement('h3');
       if (proj.url) {
         const a = document.createElement('a');
-        a.href = proj.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = proj.name;
+        a.href = proj.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = name;
         h3.appendChild(a);
       } else {
-        h3.textContent = proj.name;
+        h3.textContent = name;
       }
       const meta = document.createElement('p');
-      meta.textContent = `${copy.type || ''} · ${copy.city || ''}`;
+      meta.textContent = proj.demo ? (copy.tagline || '') : `${copy.type || ''} · ${copy.city || ''}`;
       info.append(h3, meta);
       if (proj.url) {
         const cta = document.createElement('span');

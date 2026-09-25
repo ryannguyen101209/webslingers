@@ -184,6 +184,11 @@ a { color: inherit; }
 .project:has(a:focus-visible) { outline: 3px solid var(--ink); outline-offset: 4px; box-shadow: var(--shadow), 0 0 0 9px var(--red); }
 .project-cta { display: inline-block; margin-top: .6rem; font-family: var(--head); font-weight: 700; font-size: .8rem; border-bottom: 3px solid var(--red); }
 .project-info p { font-weight: 600; margin-top: .25rem; }
+.demo-badge {
+  display: inline-block; margin-bottom: .5rem;
+  padding: .15rem .6rem; font-family: var(--head); font-weight: 700; font-size: .7rem; letter-spacing: .02em;
+  background: var(--cream); border: 2px solid var(--ink); border-radius: 999px;
+}
 .quote { margin: 2.5rem 0 0; padding: 1.5rem; font-size: 1.15rem; font-weight: 600; }
 .quote cite { display: block; margin-top: .75rem; font-style: normal; font-weight: 800; }
 
